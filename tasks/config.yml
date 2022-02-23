@@ -21,7 +21,7 @@
   with_items: "{{ drbd_disks }}"
 
 - name: config | Creating DRBD Mirror Devices
-  command: drbdadm create-md {{ item['item']['resource'] }}
+  command: "{{ drbd_drbdadm_path }} create-md {{ item['item']['resource'] }}"
   become: true
   register: _drbd_mirror_device_created
   with_items: "{{ _drbd_mirror_device_creation_status['results'] }}"
@@ -36,7 +36,7 @@
   when: item['changed']
 
 - name: config | Bringing DRBD Mirror Devices Up
-  command: drbdadm up {{ item['resource'] }}
+  command: "{{ drbd_drbdadm_path }} up {{ item['resource'] }}"
   become: true
   register: _drbd_mirror_device_up
   with_items: "{{ drbd_disks}}"
@@ -44,7 +44,7 @@
         _drbd_mirror_device_created['changed']
 
 - name: config | Defining DRBD Primary
-  command: drbdadm -- --overwrite-data-of-peer primary {{ item['resource'] }}/0
+  command: "{{ drbd_drbdadm_path }} -- --overwrite-data-of-peer primary {{ item['resource'] }}/0"
   become: true
   register: _drbd_primary
   with_items: "{{ drbd_disks }}"
