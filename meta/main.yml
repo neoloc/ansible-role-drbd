@@ -1,0 +1,22 @@
+galaxy_info:
+  namespace: neoloc
+  role_name: drbd
+  author: neoloc
+  description: An [Ansible](https://www.ansible.com) role to install/configure [DRBD](https://docs.linbit.com/)
+  license: MIT
+  min_ansible_version: 2.9.0
+  platforms:
+    - name: Ubuntu
+      versions:
+        - xenial
+    - name: Debian
+      versions:
+        - bullseye
+    - name: EL
+      versions:
+        - 6
+        - 7
+  galaxy_tags:
+    - system
+    - clustering
+dependencies: []
