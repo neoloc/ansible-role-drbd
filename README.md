@@ -1,20 +1,4 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-**Table of Contents**  _generated with [DocToc](https://github.com/thlorenz/doctoc)_
-
--   [ansible-drbd](#ansible-drbd)
-    -   [Requirements](#requirements)
-    -   [Role Variables](#role-variables)
-    -   [Dependencies](#dependencies)
-    -   [Example Playbook](#example-playbook)
-    -   [License](#license)
-    -   [Author Information](#author-information)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-# ansible-drbd
+# ansible-role-drbd
 
 An [Ansible](https://www.ansible.com) role to install/configure [DRBD](https://docs.linbit.com/)
 
@@ -31,18 +15,14 @@ The following requirements are needed for this role:
 -   Unpartitioned disk
 -   VIP
 
-The additional required roles are included in [requirements.yml](requirements.yml)
-which can be installed using `ansible-galaxy`:
-
-```bash
-ansible-galaxy install -r requirements.yml
-```
 
 ## Role Variables
 
 ```yaml
 ---
-# defaults file for ansible-drbd
+# defaults file for ansible-role-drbd
+
+drbd_configure: true
 
 drbd_common:
   disk: ''
@@ -82,7 +62,7 @@ drbd_use_parted: true
 
 ## Platform Specific Notes
 
-Debian Stretch and Ubuntu Xenial contains DRBD in kernel, and supports Heartbeat.  They have the most out of the box support for the defaults.
+Debian Bullseye and Ubuntu Xenial contains DRBD in kernel, and supports Heartbeat.  They have the most out of the box support for the defaults.
 
 DRBD packages for CentOS can be built from [linbit](https://www.linbit.com), or from [ELREPO](http://elrepo.org/) repository. These should be included in the `drbd_rpm_packages` list.  See vagrant-box-templates `playbook.yml` examples below.
 
@@ -118,25 +98,6 @@ drbd_unicast_port: 694
     - role: ansible-drbd
 ```
 
-## Testing
-
-Testing makes use of [vagrant-box-templates](https://github.com/mrlesmithjr/vagrant-box-templates.git), where the following systems have been tested.
-
-* CentOS6 / CentOS7
-* Debian stretch64
-* Ubuntu xenial64
-
-The `nodes.yml` and `playbook.yml` files have been included as working examples. See the `tests/` directory for further information.
-
 ## License
 
 MIT
-
-## Author Information
-
-Larry Smith Jr.
-
--   [@mrlesmithjr](https://www.twitter.com/mrlesmithjr)
--   [EverythingShouldBeVirtual](http://everythingshouldbevirtual.com)
--   [mrlesmithjr.com](http://mrlesmithjr.com)
--   mrlesmithjr [at] gmail.com
