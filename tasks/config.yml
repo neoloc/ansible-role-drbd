@@ -36,6 +36,8 @@
   register: _drbd_mirror_device_created
   with_items: "{{ _drbd_mirror_device_creation_status['results'] }}"
   when: not item['stat']['exists']
+  environment:
+    PATH: '/usr/sbin/:{{ ansible_env.PATH }}'
 
 - name: config | Marking DRDB Mirror Devices Created
   file:
@@ -52,6 +54,8 @@
   with_items: "{{ drbd_disks}}"
   when: >
         _drbd_mirror_device_created['changed']
+  environment:
+    PATH: '/usr/sbin/:{{ ansible_env.PATH }}'
 
 - name: config | Defining DRBD Primary
   command: "{{ drbd_drbdadm_path }} -- --overwrite-data-of-peer primary {{ item['resource'] }}/0"
@@ -61,9 +65,11 @@
   when: >
         _drbd_mirror_device_up['changed'] and
         inventory_hostname == groups[drbd_group][0]
+  environment:
+    PATH: '/usr/sbin/:{{ ansible_env.PATH }}'
 
 - name: config | Waiting For DRBD Sync To Complete
-  command: drbd-overview
+  command: "{{ drbd_drbdadm_path }} status"
   become: true
   register: _drbd_sync
   until: ('Inconsistent' not in _drbd_sync['stdout'])
@@ -72,6 +78,8 @@
   when: >
         _drbd_primary['changed'] and
         inventory_hostname == groups[drbd_group][0]
+  environment:
+    PATH: '/usr/sbin/:{{ ansible_env.PATH }}'
 
 - name: config | Partitioning DRBD Device
   filesystem:
