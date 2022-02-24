@@ -20,5 +20,5 @@ bcast {{ drbd_interface }}
 {% endif %}
 
 {% for host in groups[drbd_group] %}
-node {{ hostvars[host]['inventory_hostname_short'] }}
+node {{ hostvars[host]['inventory_hostname'] }}
 {% endfor %}
