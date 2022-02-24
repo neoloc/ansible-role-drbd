@@ -8,6 +8,16 @@
     mode: "u=rw,g=r,o=r"
   become: true
 
+- name: config | Configuring DRBD Resources
+  template:
+    src: etc/drbd.d/resource.res.j2
+    dest: "/etc/drbd.d/{{ item.resource }}.res"
+    owner: root
+    group: root
+    mode: "u=rw,g=r,o=r"
+  become: true
+  with_items: "{{ drbd_disks }}"
+
 - name: config | Loading DRBD Kernel Module
   modprobe:
     name: drbd
