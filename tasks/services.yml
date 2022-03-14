@@ -11,3 +11,11 @@
     enabled: true
   become: true
   when: drbd_use_heartbeat
+
+- name: services | Ensuring nfs-kernel-server Service Is stopped On Boot
+  service:
+    name: nfs-kernel-server
+    enabled: false
+  become: true
+  when: drbd_ha_nfsserver == true
+

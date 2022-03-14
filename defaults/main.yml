@@ -2,6 +2,7 @@
 # defaults file for ansible-role-drbd
 drbd_configure: false
 drbd_drbdadm_path: /usr/sbin/drbdadm
+drbd_ha_nfsserver: false
 
 drbd_common:
   disk: ''
