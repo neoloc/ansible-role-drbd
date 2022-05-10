@@ -2,7 +2,10 @@
 # defaults file for ansible-role-drbd
 drbd_configure: false
 drbd_drbdadm_path: /usr/sbin/drbdadm
-drbd_ha_nfsserver: false
+
+# setup heartbeat to start/stop a service
+drbd_ha_service: false
+drbd_ha_servicename: nfs-kernel-server
 
 drbd_common:
   disk: ''

@@ -12,10 +12,10 @@
   become: true
   when: drbd_use_heartbeat
 
-- name: services | Ensuring nfs-kernel-server Service Is stopped On Boot
+- name: services | Ensuring Monitored Service Is Stopped On Boot
   service:
-    name: nfs-kernel-server
+    name: "{{ drbd_ha_servicename }}"
     enabled: false
   become: true
-  when: drbd_ha_nfsserver == true
+  when: drbd_ha_service == true and drbd_ha_servicename is defined
 

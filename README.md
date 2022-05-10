@@ -23,6 +23,8 @@ The following requirements are needed for this role:
 # defaults file for ansible-role-drbd
 
 drbd_configure: true
+drbd_ha_service: false
+drbd_ha_servicename: nfs-kernel-server
 
 drbd_common:
   disk: ''

@@ -1,5 +1,5 @@
 # {{ ansible_managed }}
 
 {% for item in drbd_disks %}
-{{ hostvars[groups[drbd_group][0]]['inventory_hostname'] }} {{ drbd_vip }} drbddisk::{{ item['resource'] }} Filesystem::{{ item['device'] }}::{{ item['mountpoint'] }}::{{ item['filesystem'] }}::noatime{% if drbd_ha_nfsserver == true %} nfs-kernel-server{% endif %}
+{{ hostvars[groups[drbd_group][0]]['inventory_hostname'] }} {{ drbd_vip }} drbddisk::{{ item['resource'] }} Filesystem::{{ item['device'] }}::{{ item['mountpoint'] }}::{{ item['filesystem'] }}::noatime{% if drbd_ha_service == true and drbd_ha_servicename is defined %} {{ drbd_ha_servicename }}{% endif %}
 {% endfor %}
