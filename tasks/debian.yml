@@ -12,10 +12,3 @@
     state: present
   become: true
   when: cron_apt_configure
-
-- name: debian | Installing NFS-Kernel-Server Package
-  apt:
-    name: nfs-kernel-server
-    state: present
-  become: true
-  when: drbd_ha_nfsserver == true
